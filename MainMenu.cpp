@@ -1,5 +1,5 @@
 #include <iostream>;
-#include <string>;
+#include <fstream>;
 
  using namespace std;
 
@@ -22,22 +22,10 @@ static void DisplayList () {
         cout << " Enter the Number:\n";
         cin >> input;
 
-        switch (choice) {
-           case 1:
-                cout << "List of All (*.*) Files\n";
 
                 
 
 
             
-
-
-
-
-
-
-
-
-
 
 }
