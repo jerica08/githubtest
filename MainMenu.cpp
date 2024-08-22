@@ -1,8 +1,40 @@
 #include <iostream>
-#include <string>
+#include <fstream> // in order to calll the libraries of file
+#include <iostream>
+#include <direct.h>
+using namespace std;
+
+string path = "C:\Documents\Jerica\githubtest";
+
+int main(){
+     int choice;
+      do{
+         main_menu();
+           cout << "Enter your choice:";
+           cin >> choice;
+         
+         switch (choice){
+            case 1:
+               list_files();
+               break;
+            case 2:
+               create_directory();
+               break;
+            case 3:
+               change_directory();
+               break;
+         }
 
 
-void mainMenu(){
+
+
+      }
+    
+   return 0;
+}
+
+
+void main_menu(){
 
    cout << "     MENU OPTIONS\n";
    cout << "----------------------\n";
@@ -13,7 +45,7 @@ void mainMenu(){
    cout << "Enter the Number: \n";     
 
 }
-void listFiles(){
+void list_files(){
    cout << "     LIST FILE DETAIL     \n";
    cout << "--------------------------\n";
    cout << "1. List All Files\n";
@@ -22,12 +54,12 @@ void listFiles(){
    cout << "Enter th Number: \n";
 
 }            
-void createDirectory(){
+void create_directory(){
    cout << "Enter the Directory name: \n";
    cout << "Current directory: \n";
 
 } 
-void changeDirectory(){
+void change_directory(){
    cout << "     Change Directory     \n";
    cout << "--------------------------\n";
    cout << "1. Step by Step Backward\n";
@@ -38,11 +70,4 @@ void changeDirectory(){
    cout << "Current Directory:\n";
    
 
-
-}
-void listFiles(){
-}            
-void extensionFiles(){        
-}
-void nameWise(){        
 }
