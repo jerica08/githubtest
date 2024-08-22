@@ -19,6 +19,9 @@ int main(){
                break;
             case 2:
                create_directory();
+                
+
+
                break;
             case 3:
                change_directory();
@@ -55,9 +58,20 @@ void list_files(){
 
 }            
 void create_directory(){
-   cout << "Enter the Directory name: \n";
-   cout << "Current directory: \n";
+   string dir_name;
+      cout << "Enter the Directory name: \n";
+   getline(cin,dir_name);
+      cout << "Current directory: \n";
+   if(mkdir(dir_name.c_str()) == 0){
+      
+      cout << "Directory" << dir_name << "created successfully.\n";
+   }else{
+      perror("Failed to create directory.");
+   }
 
+   cout << "Current directory: \n";
+     
+   
 } 
 void change_directory(){
    cout << "     Change Directory     \n";
