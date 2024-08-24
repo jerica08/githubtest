@@ -1,5 +1,5 @@
 #include <iostream>
-#include <fstream> // in order to calll the libraries of file
+#include <fstream> 
 #include <iostream>
 #include <direct.h>
 using namespace std;
@@ -7,37 +7,14 @@ using namespace std;
 string path = "C:\Documents\Jerica\githubtest";
 
 int main(){
-     int choice;
-      do{
+     
+      while(true){
          main_menu();
-           cout << "Enter your choice:";
-           cin >> choice;
-         
-         switch (choice){
-            case 1:
-               list_files();
-               break;
-            case 2:
-               create_directory();
-                
-
-
-               break;
-            case 3:
-               change_directory();
-               break;
-         }
-
-
-
-
       }
-    
-   return 0;
 }
-
-
+         
 void main_menu(){
+   int choice;
 
    cout << "     MENU OPTIONS\n";
    cout << "----------------------\n";
@@ -45,7 +22,23 @@ void main_menu(){
    cout << "2.To Create  New Directory\n";
    cout << "3. To Change the Working Directory\n";
    cout << "4.Exit\n";
-   cout << "Enter the Number: \n";     
+   cout << "Enter the Number: \n";  
+   cin >> choice;   
+
+     switch(choice){
+      case 1:
+               list_files();
+               break;
+         case 2:
+               create_directory();
+                
+               break;
+         case 3:
+               change_directory();
+               break;
+         case 4:
+              
+     }
 
 }
 void list_files(){
