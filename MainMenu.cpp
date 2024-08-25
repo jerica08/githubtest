@@ -3,9 +3,20 @@
 #include <fstream> 
 
 using namespace std;
-using namespace filesystem;
+ namespace fs = filesystem;
 
+string current_path = "C:\testfile";
 
+void main_menu();
+void list_files();
+void create_directory();
+void change_directory();
+void all_files();
+void extension_files();
+void name_wise();
+void one_step_back();
+void root_directory();
+void forward_directory();
 
 int main(){
      
@@ -66,16 +77,18 @@ void list_files(){
        
 }            
 void create_directory(){
-   string dir_name[30];
-      cout << "Enter teh Direcotry Name: ";
-      ofstream(dir_name);
+       string dir_name;
+       current_path = 
+       
+       cout << "Enter the name of Directory: ";
+       cin >> dir_name;
 
-      if ((dir_name)){
-
-      }
-   
-
-   cout << "Current directory: \n";
+       if(create_directory(dir_name)){
+         cout << dir_name << "Directory Successfully Created" << endl;
+         cout << "Current Directory: " << current_path << endl;
+       } else{
+         cout << "Failed to create directory" << endl;
+       }
      
    
 } 
@@ -107,10 +120,14 @@ void change_directory(){
    }
 }
 void all_files(){
-   system("C:\Documents\Jerica\githubtest");
+   cout << "Listing all Files";
+   for(const auto& entry : fs:: directory_iterator(fs::current_path())){
+      cout << entry.path().filename().string() << endl;
+   }
 
 }
 void extension_files(){
+   
 
 }
 void name_wise(){
