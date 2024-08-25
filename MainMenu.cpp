@@ -1,10 +1,11 @@
 #include <iostream>
+#include <filesystem>
 #include <fstream> 
-#include <iostream>
-#include <direct.h>
-using namespace std;
 
-string path = "C:\Documents\Jerica\githubtest";
+using namespace std;
+using namespace filesystem;
+
+
 
 int main(){
      
@@ -65,16 +66,14 @@ void list_files(){
        
 }            
 void create_directory(){
-   string dir_name;
-      cout << "Enter the Directory name: \n";
-   getline(cin,dir_name);
-      cout << "Current directory: \n";
-   if(mkdir(dir_name.c_str()) == 0){
-      
-      cout << "Directory" << dir_name << "created successfully.\n";
-   }else{
-      perror("Failed to create directory.");
-   }
+   string dir_name[30];
+      cout << "Enter teh Direcotry Name: ";
+      ofstream(dir_name);
+
+      if ((dir_name)){
+
+      }
+   
 
    cout << "Current directory: \n";
      
@@ -92,7 +91,7 @@ void change_directory(){
    cout << "3. Forward Directory\n";
    cout << "Enter the Number: \n\n";
    cout << "Current Directory:\n";
-   cin >> path;
+   cin >> directorypath;
    switch(choice){
          case 1:
            one_step_back();
