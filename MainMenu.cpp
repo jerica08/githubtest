@@ -74,7 +74,7 @@ void list_files(){
    }
        
 }            
-void create_directory(){
+void create_directory(){ // To create a directory
        string dir_name;
    
        cout << "Enter the name of Directory: ";
@@ -89,7 +89,7 @@ void create_directory(){
      
    
 } 
-void change_directory(){
+void change_directory(){ // To change a directory
    
    int choice;
    string path;
@@ -127,12 +127,17 @@ void change_directory(){
          break;
    }
 }
-void all_files(){
+void all_files(){ // To view all the files
+   fs:: path directory = fs:: current_path();
+   int file_count = 0;
+
    cout << endl << "Listing all Files" << endl << endl;
    for(const auto& entry : fs:: directory_iterator(fs::current_path())){
-      cout << entry.path().filename().string() << endl;   
+      cout << entry.path().filename().string() << endl; 
+      file_count++;
    }
-
+     cout << "Total File: " << file_count << endl;
+      
 }
 void extension_files(){
      string ext;
