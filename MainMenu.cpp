@@ -1,11 +1,13 @@
 #include <iostream>
 #include <filesystem>
 #include <fstream> 
+#include <direct.h>
 
 using namespace std;
- namespace fs = filesystem;
+namespace fs = filesystem;
 
-string current_path = "C:mainfile";
+
+fs::path dir_path = fs::current_path();
 
 void main_menu();
 void list_files();
@@ -16,6 +18,7 @@ void extension_files();
 void name_wise();
 
 int main(){
+     
      
       while(true){
          main_menu ();
@@ -44,11 +47,19 @@ void main_menu(){
                create_directory();
                break;
          case 3:
+               cout << "Current Directory:" << dir_path << endl << endl;
                change_directory();
-               
-              
-     }
 
+               break;
+         case 4:
+               cout << "Exiting program." << endl;
+               break;
+            default:
+               cout << "Invalid choice, try again." << endl;   
+               return main_menu();     
+     }
+       while (choice !=4);
+      
 }
 void list_files(){
    int choice;
@@ -64,68 +75,77 @@ void list_files(){
    switch (choice){
       case 1:
           all_files();
+           return main_menu();
           break;
       case 2:
           extension_files();
+           return main_menu();
           break;
       case 3:
            name_wise();
+            return main_menu();
            break;    
    }
        
 }            
 void create_directory(){ // To create a directory
-       string dir_name;
-   
-       cout << "Enter the name of Directory: ";
-       cin >> dir_name;
+      string dir_name;
+        cout << "Enter the name of the directory to create: ";
+        cin >> dir_name;
+      
 
-       if(fs::create_directory(dir_name)){
-         cout << dir_name << " " << "Directory Successfully Created" << endl;
-         cout << "Current Directory:" << current_path << endl;
-       } else{
-         cout << "Failed to create directory" << endl;
-       }
-     
+    fs::path dir_path = fs::current_path() / dir_name;
+
+    if (fs::exists(dir_path)) {
+         cout << "Directory already exists.\n";
+    } else {
+        if (fs::create_directory(dir_path)) {
+            cout << dir_name << " " << "Directory created successfully.\n";
+            cout << "Current Directory: " << dir_path  << endl;
+        } else {
+            cout << "Failed to create directory.\n";
+            
+        }
+    }
+      return main_menu();
    
 } 
 void change_directory(){ // To change a directory
    
    int choice;
-   string path;
    
    cout << "     Change Directory     \n";
    cout << "--------------------------\n";
    cout << "1. Step by Step Backward\n";
    cout << "2. Goto Root Directory\n";
    cout << "3. Forward Directory\n";
-   cout << "Enter the Number: \n";
+   cout << "Enter the Number:  ";
    cin >> choice;
-   cin >> path;
+
+   char dir_name[100];
 
     switch(choice){
          case 1:
-            fs::current_path(fs::current_path().parent_path());
+            _chdir("..");
             cout << "Moved to parent directory.\n";
 
          break;
       case 2:
-           fs::current_path(fs::current_path().root_path());
+          _chdir("\\");
             cout << "Moved to root directory.\n";
          break;
       case 3:
-           string path;
-    cout << "Enter the path to the directory: ";
-            cin >> path;
-            if (fs::exists(path) && fs::is_directory(path)) {
-                fs::current_path(path);
-                cout << "Directory changed successfully to: " << path << endl;
-            } else {
-                cout << "Failed to change directory. Check the path and try again.\n";
-            }
-
+           
+         cout << "Please enter the Directory Name: ";
+         cin >> dir_name;
+            if (_chdir(dir_name) == 0) {
+                cout << "Current Directory: " << dir_path << endl;
+            } 
+         return main_menu();
          break;
    }
+   
+    
 }
 void all_files(){ // To view all the files
    fs:: path directory = fs:: current_path();
@@ -137,20 +157,23 @@ void all_files(){ // To view all the files
       file_count++;
    }
      cout << "Total File: " << file_count << endl;
-      
+
+    
 }
 void extension_files(){
      string ext;
-      cout << "Enter the file extension (ex. .txt): ";
+      cout << "Enter the file extension (ex. .txt,.doc,pdf): ";
       cin >> ext;
       
-       cout << "Listing all files with extension " << ext << ":\n";
-    for (const auto& entry : fs::directory_iterator(fs::current_path())) {
+       cout << "Listing all files with extension: " << endl;
+       for (const auto& entry : fs::directory_iterator(fs::current_path())) {
         if (entry.path().extension() == ext) {
             cout << entry.path().filename().string() << endl;
         }
+         
     }
-
+   
+    
 }
 void name_wise(){
    string pattern;
@@ -162,8 +185,10 @@ void name_wise(){
         if (entry.path().filename().string().find(pattern) != string::npos) {
             cout << entry.path().filename().string() << endl;
         }
+         
     }
-
+   
+    
 }
 
 
